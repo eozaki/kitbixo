@@ -1,0 +1,33 @@
+====== Dia 11/02/16 ======
+Número de kits vendidos: 130 (79 quitados)
+Valor total arrecadado: R$ 7510
+Mochilas vermelhas: 89
+Mochilas brancas: 41
+Camisetas P: 22
+Camisetas M: 55
+Camisetas G: 27
+Camisetas GG: 13
+Camisetas Baby G: 7
+Balanço no final do dia: R$ -5490
+====== Dia 12/02/16 ======
+Número de kits vendidos: 26 (21 quitados)
+Valor total arrecadado: R$ 1889
+Mochilas vermelhas: 8
+Mochilas brancas: 18
+Camisetas P: 8
+Camisetas M: 4
+Camisetas G: 3
+Camisetas GG: 5
+Camisetas Baby G: 5
+Balanço no final do dia: R$ -3601
+====== Total ======
+Número de kits vendidos: 181 (178 quitados)
+Valor total arrecadado: R$ 14300
+Mochilas vermelhas: 97
+Mochilas brancas: 84
+Camisetas P: 33
+Camisetas M: 60
+Camisetas G: 41
+Camisetas GG: 21
+Camisetas Baby G: 16
+Balanço: R$ 1300
