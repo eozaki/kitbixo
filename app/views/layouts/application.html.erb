@@ -1,39 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KitbIXO2</title>
-  <%= stylesheet_link_tag    "application", :media => "all", 'data-turbolinks-track' => true  %>
-  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Kitbixo</title>
+    <%= csrf_meta_tags %>
 
-<h1><%= link_to "Sistema Kit-bIXO", home_index_path %></h1>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-<nav>
-  <ul>
-    <li>
-      <%= link_to "bIXES", bixos_path %>
-    </li>
-    <li>
-      <%= link_to "Kits-bixo", vendas_path %>
-    </li>
-    <li>
-      <%= link_to "Veteranes", veteranos_path %>
-    </li>
-    <li>
-      <%= link_to "Esportes", esportes_path %>
-    </li>
-  </ul>
-</nav>
-
-<section>
-  <%= yield %>
-</section>
-
-<footer style="height: 120px"></footer>
-
-</body>
+  <body>
+    <%= yield %>
+  </body>
 </html>

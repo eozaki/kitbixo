@@ -1,2 +1,0 @@
-module EsporteBixosHelper
-end
