@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @bixo.nome %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @bixo.email %>
+</p>
+
+<p>
+  <strong>Telefone:</strong>
+  <%= @bixo.telefone %>
+</p>
+
+<p>
+  <strong>Curso:</strong>
+  <%= @bixo.curso %>
+</p>
+
+<%= link_to 'Edit', edit_bixo_path(@bixo) %> |
+<%= link_to 'Back', bixos_path %>
