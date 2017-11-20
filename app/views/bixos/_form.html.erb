@@ -11,27 +11,45 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :nome %>
-    <%= form.text_field :nome, id: :bixo_nome %>
+  <div class="row">
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Nome: " %>
+        <%= form.text_field :nome, id: :bixo_nome %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Email: " %>
+        <%= form.text_field :email, id: :bixo_email %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Telefone: " %>
+        <%= form.text_field :telefone, id: :bixo_telefone %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Curso: " %><br>
+        <%= form.collection_select :curso, Bixo.cursos, :last, :first %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :bixo_email %>
+  <div class="col-md-3">
+    <div class="actions">
+      <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :telefone %>
-    <%= form.text_field :telefone, id: :bixo_telefone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :curso %>
-    <%= form.collection_select :curso, Bixo.cursos, :last, :first %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit (form.object.new_record? ? 'Cadastrar bIXO' : 'Atualizar bIXO'), class: 'btn btn-success' %>
+  <div class="col-md-3 col-md-offset-6">
+    <div class="actions">
+      <%= form.submit (form.object.new_record? ? 'Cadastrar bIXO' : 'Atualizar bIXO'), class: 'btn btn-success btn-lg' %>
+    </div>
   </div>
 <% end %>
