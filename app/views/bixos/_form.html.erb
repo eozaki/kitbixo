@@ -15,7 +15,7 @@
     <div class="col-md-3 col-xs-12">
       <div class="field">
         <%= form.label "Nome: " %>
-        <%= form.text_field :nome, id: :bixo_nome %>
+        <%= form.text_field :nome, id: :bixo_nome, autofocus: true %>
       </div>
     </div>
 
@@ -41,15 +41,17 @@
     </div>
   </div>
 
-  <div class="col-md-3">
-    <div class="actions">
-      <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg' %>
+  <div class="row">
+    <div class="col-md-3 col-xs-6">
+      <div class="actions">
+        <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg btn-wide' %>
+      </div>
     </div>
-  </div>
 
-  <div class="col-md-3 col-md-offset-6">
-    <div class="actions">
-      <%= form.submit (form.object.new_record? ? 'Cadastrar bIXO' : 'Atualizar bIXO'), class: 'btn btn-success btn-lg' %>
+    <div class="col-md-3 col-md-offset-6 col-xs-6">
+      <div class="actions">
+        <%= form.submit (form.object.new_record? ? 'Cadastrar' : 'Atualizar'), class: 'btn btn-success btn-lg' %>
+      </div>
     </div>
   </div>
 <% end %>
