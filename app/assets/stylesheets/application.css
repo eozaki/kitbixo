@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+:root {
+  --sports-red: #f00;
+  --sports-white: #ddd;
+}
+
+.banner {
+  background: var(--sports-red);
+  padding: 20px;
+  color: var(--sports-white);;
+  font-size: 1.7em;
+}
