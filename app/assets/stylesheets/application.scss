@@ -20,6 +20,13 @@
 :root {
   --sports-red: #f00;
   --sports-white: #ddd;
+  --light-red-bg: #fee;
+  --light-blue-bg: #eef;
+}
+
+.grid {
+  margin-top: 50px;
+  font-size: 1.2em;
 }
 
 .banner {
@@ -27,4 +34,24 @@
   padding: 20px;
   color: var(--sports-white);;
   font-size: 1.7em;
+}
+
+[class*="list-item-"] {
+  font-size: 1.3em;
+}
+
+[class*="list-item-"]:not(:first-of-type) {
+  margin-top: 5px
+}
+
+.list-item-0 {
+  background: var(--light-red-bg);
+}
+
+.list-item-1 {
+  background: var(--light-blue-bg);
+}
+
+.btn {
+  color: #fff !important;
 }

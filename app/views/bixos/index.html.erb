@@ -1,7 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <div class="col-xs-4 col-xs-offset-8 col-md-1 col-md-offset-11">
-    <%= link_to 'Novo bIXO', new_bixo_path, class: 'btn btn-primary' %>
+  <div class="col-xs-6 col-xs-offset-6 col-md-1 col-md-offset-11">
+    <%= link_to 'Novo bIXO', new_bixo_path, class: 'btn btn-success btn-lg' %>
   </div>
+</div>
+
+<div class="grid">
+  <% @bixos.each_with_index do |b, i| %>
+    <div class="row list-item-<%= i % 2 %>">
+      <%= link_to bixo_path(b.id) do %>
+        <div class="col-md-4 col-xs-6">
+          <%= b.nome %>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <%= b.email %>
+        </div>
+        <div class="col-md-2 hiddex-sm-down">
+          <!-- add kit payment status -->
+        </div>
+        <div class="col-md-2 hiddex-sm-down">
+          <!-- add sports link -->
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
