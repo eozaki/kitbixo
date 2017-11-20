@@ -10,8 +10,15 @@
 
   <body>
     <div class="banner">
-      <h1>KIT bIXO</h1>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h1>KIT bIXO</h1>
+        </div>
+      </div>
     </div>
-    <%= yield %>
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

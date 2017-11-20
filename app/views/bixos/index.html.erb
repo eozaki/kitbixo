@@ -1,33 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Bixos</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Telefone</th>
-      <th>Curso</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bixos.each do |bixo| %>
-      <tr>
-        <td><%= bixo.nome %></td>
-        <td><%= bixo.email %></td>
-        <td><%= bixo.telefone %></td>
-        <td><%= bixo.curso %></td>
-        <td><%= link_to 'Show', bixo %></td>
-        <td><%= link_to 'Edit', edit_bixo_path(bixo) %></td>
-        <td><%= link_to 'Destroy', bixo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Bixo', new_bixo_path %>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-8 col-md-1 col-md-offset-11">
+    <%= link_to 'Novo bIXO', new_bixo_path, class: 'btn btn-primary' %>
+  </div>
+</div>
