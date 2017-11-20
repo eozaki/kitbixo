@@ -69,6 +69,7 @@ class BixosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bixo_params
+      params[:bixo][:curso] = params[:bixo][:curso].to_i
       params.require(:bixo).permit(:nome, :email, :telefone, :curso)
     end
 end

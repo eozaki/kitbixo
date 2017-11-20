@@ -1,7 +1,7 @@
 <%= form_with(model: bixo, local: true) do |form| %>
   <% if bixo.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(bixo.errors.count, "error") %> prohibited this bixo from being saved:</h2>
+      <h2><%= pluralize(bixo.errors.count, "error") %> fizeram com que o bIXO não pudesse ser salvo:</h2>
 
       <ul>
       <% bixo.errors.full_messages.each do |message| %>
@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :curso %>
-    <%= form.number_field :curso, id: :bixo_curso %>
+    <%= form.collection_select :curso, Bixo.cursos, :last, :first %>
   </div>
 
   <div class="actions">
