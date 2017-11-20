@@ -4,6 +4,7 @@ class BixosController < ApplicationController
   # GET /bixos
   # GET /bixos.json
   def index
+    flash[:success] = 'Oi, amiguinho'
     @bixos = Bixo.all
   end
 
