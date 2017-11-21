@@ -1,16 +1,4 @@
 <%= form_with(model: bixo, local: true) do |form| %>
-  <% if bixo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(bixo.errors.count, "error") %> fizeram com que o bIXO não pudesse ser salvo:</h2>
-
-      <ul>
-      <% bixo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="row">
     <div class="col-md-3 col-xs-12">
       <div class="field">

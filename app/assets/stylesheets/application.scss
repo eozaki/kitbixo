@@ -28,24 +28,27 @@
   width: 100%;
 }
 
+.lil-top-margin {
+  margin-top: 25px;
+}
+
 .grid {
-  margin-top: 50px;
-  font-size: 1.2em;
+  margin-top: 30px;
 }
 
 .banner {
   background: var(--sports-red);
   padding: 20px;
   color: var(--sports-white);;
-  font-size: 1.7em;
-}
-
-[class*="list-item-"] {
-  font-size: 1.3em;
+  margin-bottom: 30px;
 }
 
 [class*="list-item-"]:not(:first-of-type) {
   margin-top: 5px
+}
+
+[class*="col-"] {
+  display: block
 }
 
 .list-item-0 {
