@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005172531) do
+ActiveRecord::Schema.define(version: 20171202232819) do
 
   create_table "bixos", force: :cascade do |t|
     t.string "nome"
     t.string "email"
     t.string "telefone"
     t.integer "curso"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "modalidades", force: :cascade do |t|
+    t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

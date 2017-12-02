@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
   root to: 'bixos#index'
+
   resources :bixos
+  resources :modalidades
 end
