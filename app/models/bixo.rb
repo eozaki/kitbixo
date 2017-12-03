@@ -4,5 +4,7 @@ class Bixo < ApplicationRecord
   validates :email, presence: true
   validates :curso, presence: true
 
+  has_and_belongs_to_many :modalidades
+
   enum curso: [:lic, :pura, :bcc, :estat, :aplicada, :bmac].freeze
 end

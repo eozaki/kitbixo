@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202232819) do
+ActiveRecord::Schema.define(version: 20171203155057) do
 
   create_table "bixos", force: :cascade do |t|
     t.string "nome"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20171202232819) do
     t.integer "curso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "bixos_modalidades_tables", id: false, force: :cascade do |t|
+    t.integer "bixo_id"
+    t.integer "modalidade_id"
+    t.index ["bixo_id"], name: "index_bixos_modalidades_tables_on_bixo_id"
+    t.index ["modalidade_id"], name: "index_bixos_modalidades_tables_on_modalidade_id"
   end
 
   create_table "modalidades", force: :cascade do |t|
