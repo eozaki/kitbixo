@@ -21,11 +21,11 @@ ActiveRecord::Schema.define(version: 20171203155057) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "bixos_modalidades_tables", id: false, force: :cascade do |t|
+  create_table "bixos_modalidades", id: false, force: :cascade do |t|
     t.integer "bixo_id"
     t.integer "modalidade_id"
-    t.index ["bixo_id"], name: "index_bixos_modalidades_tables_on_bixo_id"
-    t.index ["modalidade_id"], name: "index_bixos_modalidades_tables_on_modalidade_id"
+    t.index ["bixo_id"], name: "index_bixos_modalidades_on_bixo_id"
+    t.index ["modalidade_id"], name: "index_bixos_modalidades_on_modalidade_id"
   end
 
   create_table "modalidades", force: :cascade do |t|
