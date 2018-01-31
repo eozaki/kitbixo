@@ -1,35 +1,50 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @bixo.nome %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @bixo.email %>
-</p>
-
-<p>
-  <strong>Telefone:</strong>
-  <%= @bixo.telefone %>
-</p>
-
-<p>
-  <strong>Curso:</strong>
-  <%= @bixo.curso %>
-</p>
+<h1><%= @bixo.nome %></h1>
 
 <div class="row">
-  <div class="col-md-3">
-    <div class="actions">
-      <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg' %>
-    </div>
-  </div>
+  <div class="col-md-6">
+    <h2>Dados pessoais</h2>
+    <p>
+      <strong>Nome:</strong>
+      <%= @bixo.nome %>
+    </p>
 
-  <div class="col-md-3 col-md-offset-6">
+    <p>
+      <strong>Email:</strong>
+      <%= @bixo.email %>
+    </p>
+
+    <p>
+      <strong>Telefone:</strong>
+      <%= @bixo.telefone %>
+    </p>
+
+    <p>
+      <strong>Curso:</strong>
+      <%= @bixo.curso %>
+    </p>
     <div class="actions">
       <%= link_to 'Editar', edit_bixo_path(@bixo), class: 'btn btn-success btn-lg' %>
     </div>
   </div>
+  <div class="col-md-6">
+    <h2>Modalidades</h2>
+    <% if @bixo.modalidades.empty? %>
+      <p><em>Nenhuma</em></p>
+    <% else %>
+      <% @bixo.modalidades.each do |mod| %>
+        <p>
+          <%= mod.nome %>
+        </p>
+      <% end %>
+    <% end %>
+    <div class="actions">
+      <%= link_to 'Mudar modalidades', edit_bixo_modalidades_path(@bixo), class: 'btn btn-success btn-lg' %>
+    </div>
+  </div>
 </div>
+
+<div class="actions">
+  <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg' %>
+</div>
+
