@@ -21,6 +21,26 @@ class BixosController < ApplicationController
   def edit
   end
 
+  # GET /bixos/1/modalidades
+  def modalidades
+    @bixo = Bixo.find(params[:id])
+  end
+
+  # POST /bixos/1/modalidades
+  def modify_modalidades
+    @bixo = Bixo.find(params[:id])
+    @bixo.modalidades = modalidades_params.to_hash.map { |k,v| Modalidade.find(k) }
+    respond_to do |format|
+      if @bixo.save
+        format.html { redirect_to @bixo, notice: 'Modalidades modificadas com sucesso!' }
+        format.json { render :show, status: :created, location: @bixo }
+      else
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :new }
+        format.json { render json: @bixo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /bixos
   # POST /bixos.json
   def create
@@ -71,5 +91,9 @@ class BixosController < ApplicationController
     def bixo_params
       params[:bixo][:curso] = params[:bixo][:curso].to_i
       params.require(:bixo).permit(:nome, :email, :telefone, :curso)
+    end
+
+    def modalidades_params
+      params.require(:modalidades).permit!
     end
 end
