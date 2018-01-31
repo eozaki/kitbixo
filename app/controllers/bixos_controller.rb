@@ -29,7 +29,7 @@ class BixosController < ApplicationController
   # POST /bixos/1/modalidades
   def modify_modalidades
     @bixo = Bixo.find(params[:id])
-    @bixo.modalidades = modalidades_params.to_hash.map do |k,v| Modalidade.find(k) end
+    @bixo.modalidades = modalidades_params.to_hash.map { |k,v| Modalidade.find(k) }
     respond_to do |format|
       if @bixo.save
         format.html { redirect_to @bixo, notice: 'Modalidades modificadas com sucesso!' }
