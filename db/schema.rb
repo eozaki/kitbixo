@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20180205160823) do
 
   create_table "vendas", force: :cascade do |t|
     t.string "tamanho", default: "M", null: false
-    t.string "cor", default: "Vermelho", null: false
-    t.integer "bixo_id", null: false
+    t.string "cor", default: "Vermelha", null: false
+    t.integer "bixo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bixo_id"], name: "index_vendas_on_bixo_id"
