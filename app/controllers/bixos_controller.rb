@@ -1,5 +1,6 @@
 class BixosController < ApplicationController
-  before_action :set_bixo, only: [:show, :edit, :update, :destroy, :modalidades, :modify_modalidades]
+  before_action :set_bixo, only: [:show, :edit, :update, :destroy, :modalidades,
+                                  :modify_modalidades, :nova_venda]
 
   # GET /bixos
   # GET /bixos.json
@@ -34,6 +35,20 @@ class BixosController < ApplicationController
         format.json { render :show, status: :created, location: @bixo }
       else
         format.html { flash[:error] = 'Deu caca em alguma coisa'; render :new }
+        format.json { render json: @bixo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /bixos/1/nova_venda
+  def nova_venda
+    @venda = Venda.new(bixo_id: @bixo.id)
+    respond_to do |format|
+      if @venda.save
+        format.html { redirect_to @bixo, notice: 'Venda criada com sucesso!' }
+        format.json { render :show, status: :created, location: @bixo }
+      else
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :show }
         format.json { render json: @bixo.errors, status: :unprocessable_entity }
       end
     end
