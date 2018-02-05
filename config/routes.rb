@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   post '/bixos/:id/nova_venda' => 'bixos#nova_venda', as: :nova_venda
   resources :bixos
   resources :modalidades
-  resources :vendas, except: [:show]
+  resources :vendas, except: [:show, :new]
 end

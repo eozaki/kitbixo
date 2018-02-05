@@ -7,11 +7,6 @@ class VendasController < ApplicationController
     @vendas = Venda.all
   end
 
-  # GET /vendas/new
-  def new
-    @venda = Venda.new
-  end
-
   # GET /vendas/1/edit
   def edit
   end
