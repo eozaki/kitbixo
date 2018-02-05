@@ -1,5 +1,5 @@
 class BixosController < ApplicationController
-  before_action :set_bixo, only: [:show, :edit, :update, :destroy]
+  before_action :set_bixo, only: [:show, :edit, :update, :destroy, :modalidades, :modify_modalidades]
 
   # GET /bixos
   # GET /bixos.json
@@ -23,12 +23,10 @@ class BixosController < ApplicationController
 
   # GET /bixos/1/modalidades
   def modalidades
-    @bixo = Bixo.find(params[:id])
   end
 
   # POST /bixos/1/modalidades
   def modify_modalidades
-    @bixo = Bixo.find(params[:id])
     @bixo.modalidades = modalidades_params.to_hash.map { |k,v| Modalidade.find(k) }
     respond_to do |format|
       if @bixo.save
