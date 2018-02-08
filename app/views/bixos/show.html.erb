@@ -64,6 +64,7 @@
                 <p>
                   <%= link_to edit_pagamento_path(pagamento) do %>
                     R$ <%= "%.2f" % pagamento.valor %>
+                    para <%= pagamento.veterano.nil? and "???" or pagamento.veterano.nome %>
                   <% end %>
                   <%= link_to 'X', pagamento_path(pagamento), class: 'btn btn-danger btn-xs', method: :delete %>
                 </p>

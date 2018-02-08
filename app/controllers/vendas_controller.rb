@@ -37,13 +37,13 @@ class VendasController < ApplicationController
 
   # PUT /vendas/1/pagamento
   def novo_pagamento
-    @pagamento = Pagamento.new(valor: 0.0, venda_id: @venda.id)
+    @pagamento = Pagamento.new(valor: 0.0, venda_id: @venda.id, veterano_id: Veterano.first.id)
     respond_to do |format|
       if @pagamento.save
         format.html { redirect_to edit_pagamento_path(@pagamento) }
         format.json { render :show, status: :created, location: @pagamento }
       else
-        format.html { flash[:error] = 'Deu caca em alguma coisa'; render @bixo }
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; redirect_to @bixo }
         format.json { render json: @venda.errors, status: :unprocessable_entity }
       end
     end

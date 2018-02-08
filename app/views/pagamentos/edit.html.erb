@@ -23,6 +23,15 @@
       <div class="">
         <%= number_field(:pagamento, :valor, in: 0.0 .. Venda.preco, step: 1.0) %>
       </div>
+
+      <h3>Veterane que recebeu o pagamento</h3>
+    
+      <% Veterano.all.each do |veterano| %>
+        <div class="radio">
+          <%= radio_button_tag("pagamento[veterano_id]", veterano.id, (veterano.id==@pagamento.veterano_id)) %>
+          <%= label_tag("pagamento[veterano_id]", veterano.nome) %>
+        </div>
+      <% end %>
     
       <div class="row">
         <div class="col-md-6">

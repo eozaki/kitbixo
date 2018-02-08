@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   put '/vendas/:id/novo_pagamento' => 'vendas#novo_pagamento', as: :novo_pagamento
 
   resources :bixos
+  resources :veteranos, except: [:show, :new]
   resources :modalidades
   resources :vendas, except: [:show, :new, :create]
   resources :pagamentos, except: [:show, :index, :new, :create]
