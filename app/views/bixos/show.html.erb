@@ -4,25 +4,36 @@
 <div class="row">
   <div class="col-md-4 col-xs-12">
     <h2>Dados pessoais</h2>
-    <p>
-      <strong>Nome:</strong>
-      <%= @bixo.nome %>
-    </p>
 
-    <p>
-      <strong>Email:</strong>
-      <%= @bixo.email %>
-    </p>
+    <div class="row">
+      <div class="col-md-12 col-xs-6">
+        <h4>Nome</h4>
+        <p>
+          <%= @bixo.nome %>
+        </p>
+      </div>
 
-    <p>
-      <strong>Telefone:</strong>
-      <%= @bixo.telefone %>
-    </p>
+      <div class="col-md-12 col-xs-6">
+        <h4>E-mail</h4>
+        <p>
+          <%= @bixo.email %>
+        </p>
+      </div>
 
-    <p>
-      <strong>Curso:</strong>
-      <%= @bixo.curso %>
-    </p>
+      <div class="col-md-12 col-xs-6">
+        <h4>Telefone</h4>
+        <p>
+          <%= @bixo.telefone %>
+        </p>
+      </div>
+
+      <div class="col-md-12 col-xs-6">
+        <h4>Curso</h4>
+        <p>
+          <%= @bixo.curso %>
+        </p>
+      </div>
+    </div>
     <div class="actions">
       <%= link_to 'Editar', edit_bixo_path(@bixo), class: 'btn btn-success btn-lg' %>
     </div>
@@ -52,25 +63,37 @@
           <div class="panel-heading"><h3>Kit vendido #<%= count %></h3></div>
           <div class="panel-body">
             <% count += 1 %>
-            <h4>Tamanho da camiseta</h4>
-            <p><%= venda.tamanho %></p>
-            <h4>Cor da mochila</h4>
-            <p><%= venda.cor %></p>
+            <div class='row'>
+              <div class='col-md-12 col-xs-6'>
+                <h4>Tamanho da camiseta</h4>
+                <p><%= venda.tamanho %></p>
+              </div>
+              <div class='col-md-12 col-xs-6'>
+                <h4>Cor da mochila</h4>
+                <p><%= venda.cor %></p>
+              </div>
+            </div>
             <% if venda.pagamentos.empty? %>
               <p class="text-danger"><em>Nenhum pagamento recebido ainda</em></p>
             <% else %>
-              <h4>Pagamentos:</h4>
-              <% venda.pagamentos.each do |pagamento| %>
-                <p>
-                  <%= link_to edit_pagamento_path(pagamento) do %>
-                    R$ <%= "%.2f" % pagamento.valor %>
-                    para <%= pagamento.veterano.nil? and "???" or pagamento.veterano.nome %>
+              <div class='row'>
+                <div class='col-md-12 col-xs-6'>
+                  <h4>Pagamentos:</h4>
+                  <% venda.pagamentos.each do |pagamento| %>
+                    <p>
+                      <%= link_to edit_pagamento_path(pagamento) do %>
+                        R$ <%= "%.2f" % pagamento.valor %>
+                        para <%= pagamento.veterano.nil? and "???" or pagamento.veterano.nome %>
+                      <% end %>
+                      <%= link_to 'X', pagamento_path(pagamento), class: 'btn btn-danger btn-xs', method: :delete %>
+                    </p>
                   <% end %>
-                  <%= link_to 'X', pagamento_path(pagamento), class: 'btn btn-danger btn-xs', method: :delete %>
-                </p>
-              <% end %>
-              <h4>Total pago</h4>
-              <p>R$ <%= "%.2f" % venda.total_pago %> / R$ <%= "%.2f" % Venda.preco %></p>
+                </div>
+                <div class='col-md-12 col-xs-6'>
+                  <h4>Total pago</h4>
+                  <p>R$ <%= "%.2f" % venda.total_pago %> / R$ <%= "%.2f" % Venda.preco %></p>
+                </div>
+              </div>
             <% end %>
             <% unless venda.pago? %>
               <p class="text-danger"><strong>Pagamento incompleto!</strong></p>

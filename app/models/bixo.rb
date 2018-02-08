@@ -8,5 +8,5 @@ class Bixo < ApplicationRecord
 
   has_many :vendas
 
-  enum curso: [:lic, :pura, :bcc, :estat, :aplicada, :bmac].freeze
+  enum curso: [:LIC, :PURA, :BCC, :ESTAT, :APLICADA, :BMAC].freeze
 end
