@@ -1,5 +1,5 @@
 class VendasController < ApplicationController
-  before_action :set_venda, only: [:edit, :update, :destroy]
+  before_action :set_venda, only: [:edit, :update, :destroy, :novo_pagamento]
 
   # GET /vendas
   # GET /vendas.json
@@ -9,22 +9,6 @@ class VendasController < ApplicationController
 
   # GET /vendas/1/edit
   def edit
-  end
-
-  # POST /vendas
-  # POST /vendas.json
-  def create
-    @venda = Venda.new(venda_params)
-
-    respond_to do |format|
-      if @venda.save
-        format.html { redirect_to @venda, notice: 'Venda cadastrada com sucesso!' }
-        format.json { render :show, status: :created, location: @venda }
-      else
-        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :new }
-        format.json { render json: @venda.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /vendas/1
@@ -48,6 +32,20 @@ class VendasController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @venda.bixo, notice: 'Venda apagada com sucesso' }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /vendas/1/pagamento
+  def novo_pagamento
+    @pagamento = Pagamento.new(valor: 0.0, venda_id: @venda.id)
+    respond_to do |format|
+      if @pagamento.save
+        format.html { redirect_to edit_pagamento_path(@pagamento) }
+        format.json { render :show, status: :created, location: @pagamento }
+      else
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; render @bixo }
+        format.json { render json: @venda.errors, status: :unprocessable_entity }
+      end
     end
   end
 
