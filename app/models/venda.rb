@@ -9,7 +9,7 @@ class Venda < ApplicationRecord
   end
 
   def self.tamanhos
-    ["P", "M", "G"]
+    ["P", "M", "G", "GG", "Baby Look M", "Baby Look G", "Baby Look GG"]
   end
 
   def self.preco
