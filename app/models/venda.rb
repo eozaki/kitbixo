@@ -23,4 +23,8 @@ class Venda < ApplicationRecord
     end
     total
   end
+
+  def pago?
+    total_pago >= Venda.preco
+  end
 end

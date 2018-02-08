@@ -69,10 +69,13 @@
                 </p>
               <% end %>
               <h4>Total pago</h4>
-              <p>R$ <%= "%.2f" % venda.total_pago %></p>
+              <p>R$ <%= "%.2f" % venda.total_pago %> / R$ <%= "%.2f" % Venda.preco %></p>
+            <% end %>
+            <% unless venda.pago? %>
+              <p class="text-danger"><strong>Pagamento incompleto!</strong></p>
             <% end %>
             <div class="actions">
-              <%= link_to 'Pagar', novo_pagamento_path(venda), class: 'btn btn-success', method: :put %>
+              <%= link_to 'Pagar', novo_pagamento_path(venda), class: 'btn btn-success', method: :put unless venda.pago? %>
               <%= link_to 'Editar', edit_venda_path(venda), class: 'btn btn-warning' %>
               <%= link_to 'Remover', venda_path(venda), class: 'btn btn-danger', method: :delete %>
             </div>
