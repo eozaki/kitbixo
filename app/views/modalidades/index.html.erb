@@ -1,27 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="row lil-top-margin">
+  <div class="col-xs-6 col-xs-offset-6 col-md-2 col-md-offset-10">
+    <%= link_to 'Nova Modalidade', new_modalidade_path, class: 'btn btn-success btn-lg' %>
+  </div>
+</div>
 
-<h1>Modalidades</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @modalidades.each do |modalidade| %>
-      <tr>
-        <td><%= modalidade.nome %></td>
-        <td><%= link_to 'Show', modalidade %></td>
-        <td><%= link_to 'Edit', edit_modalidade_path(modalidade) %></td>
-        <td><%= link_to 'Destroy', modalidade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Modalidade', new_modalidade_path %>
+<div class="grid">
+  <% @modalidades.each_with_index do |m, i| %>
+    <div class="row list-item-<%= i % 2 %>">
+      <%= link_to modalidade_path(m.id) do %>
+        <h4>
+          <div class="col-md-4 col-xs-6">
+            <%= m.nome %>
+          </div>
+        </h4>
+      <% end %>
+    </div>
+  <% end %>
+</div>
