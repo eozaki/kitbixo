@@ -10,18 +10,20 @@
   <% @bixos.each_with_index do |b, i| %>
     <div class="row list-item-<%= i % 2 %>">
       <%= link_to bixo_path(b.id) do %>
-        <div class="col-md-4 col-xs-6">
-          <%= b.nome %>
-        </div>
-        <div class="col-md-4 col-xs-6">
-          <%= b.email %>
-        </div>
-        <div class="col-md-2 hiddex-sm-down">
-          <!-- add kit payment status -->
-        </div>
-        <div class="col-md-2 hiddex-sm-down">
-          <!-- add sports link -->
-        </div>
+        <h4>
+          <div class="col-md-4 col-xs-6">
+            <%= b.nome %>
+          </div>
+          <div class="col-md-4 col-xs-6">
+            <%= b.email %>
+          </div>
+          <div class="col-md-2 hiddex-sm-down">
+            <!-- add kit payment status -->
+          </div>
+          <div class="col-md-2 hiddex-sm-down">
+            <!-- add sports link -->
+          </div>
+        </h4>
       <% end %>
     </div>
   <% end %>

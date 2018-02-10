@@ -5,5 +5,16 @@
   <%= @modalidade.nome %>
 </p>
 
-<%= link_to 'Edit', edit_modalidade_path(@modalidade) %> |
-<%= link_to 'Back', modalidades_path %>
+<div class="row">
+  <div class="col-md-3">
+    <div class="actions">
+      <%= link_to 'Voltar à lista', modalidades_path, class: 'btn btn-danger btn-lg' %>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-md-offset-6">
+    <div class="actions">
+      <%= link_to 'Editar', edit_modalidade_path(@modalidade), class: 'btn btn-success btn-lg' %>
+    </div>
+  </div>
+</div>
