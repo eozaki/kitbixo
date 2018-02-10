@@ -18,19 +18,19 @@
     
       <h3>Tamanho da camiseta</h3>
     
-      <% Venda.tamanhos.each do |tamanho| %>
+      <% Venda.tamanhos.each do |k, v| %>
         <div class="radio">
-          <%= radio_button_tag("venda[tamanho]", tamanho, (tamanho==@venda.tamanho)) %>
-          <%= label_tag("venda[tamanho]", tamanho) %>
+          <%= radio_button_tag("venda[tamanho]", v, (k == @venda.tamanho)) %>
+          <%= label_tag("venda[tamanho]", k) %>
         </div>
       <% end %>
     
       <h3>Cor da mochila</h3>
     
-      <% Venda.cors.each do |cor| %>
+      <% Venda.cors.each do |k, v| %>
         <div class="radio">
-          <%= radio_button_tag("venda[cor]", cor, (cor==@venda.cor)) %>
-          <%= label_tag("venda[cor]", cor) %>
+          <%= radio_button_tag("venda[cor]", v, (k == @venda.cor)) %>
+          <%= label_tag("venda[cor]", k) %>
         </div>
       <% end %>
     
