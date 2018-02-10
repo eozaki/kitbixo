@@ -27,7 +27,7 @@
     
       <h3>Cor da mochila</h3>
     
-      <% Venda.cores.each do |cor| %>
+      <% Venda.cors.each do |cor| %>
         <div class="radio">
           <%= radio_button_tag("venda[cor]", cor, (cor==@venda.cor)) %>
           <%= label_tag("venda[cor]", cor) %>

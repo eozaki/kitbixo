@@ -4,24 +4,15 @@ class Venda < ApplicationRecord
   belongs_to :bixo
   has_many :pagamentos
 
-  def self.cores
-    ["Branca", "Vermelha"]
-  end
-
-  def self.tamanhos
-    ["P", "M", "G", "GG", "Baby Look M", "Baby Look G", "Baby Look GG"]
-  end
+  enum cor: { branca: 0, vermelha: 1 }
+  enum tamanho: [:P, :M, :G, :GG, :BabyM, :BabyG, :BabyGG]
 
   def self.preco
     80
   end
 
   def total_pago
-    total = 0
-    pagamentos.each do |p|
-      total += p.valor
-    end
-    total
+    pagamentos.sum(&:valor)
   end
 
   def pago?
