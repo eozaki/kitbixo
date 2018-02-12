@@ -1,5 +1,66 @@
 
-<h1>Kits vendidos</h1>
+<h1>Venda de kits</h1>
+
+<div class="row">
+  <div class="col-md-3 col-sm-6">
+    <h3>Kits vendidos</h3>
+    <p>
+      <%= @stats[:pagos] %> pagos
+    </p>
+    <p>
+      <%= @stats[:pendentes] %> pendentes
+    </p>
+    <p>
+      <%= @stats[:vendidos] %> no total
+    </p>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <h3>Arrecadação</h3>
+    <p>
+      R$ <%= "%.2f" % @stats[:total_pago] %> pago
+    </p>
+    <p>
+      R$ <%= "%.2f" % @stats[:total_pendente] %> pendente
+    </p>
+    <p>
+      R$ <%= "%.2f" % @stats[:total_esperado] %> esperado no total
+    </p>
+    <p>
+      <% if @stats[:balanco] < 0 %><strong class="text-danger"><% else%><strong class="text-primary"><% end %>
+        R$ <%= "%.2f" % @stats[:balanco] %> de balanço real
+      </strong>
+    </p>
+    <p>
+      <% if @stats[:balanco_esperado] < 0 %><strong class="text-danger"><% else%><strong class="text-primary"><% end %>
+        R$ <%= "%.2f" % @stats[:balanco_esperado] %> de balanço esperado
+      </strong>
+    </p>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <h3>Estoque de camisetas</h3>
+    <div class="row">
+      <% @stats[:camisetas].each do |tamanho,count| %>
+        <div class="col-md-6">
+          <p>
+            <%= count %> <%= tamanho %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <h3>Estoque de mochilas</h3>
+    <div class="row">
+      <% @stats[:mochilas].each do |cor,count| %>
+        <div class="col-md-6">
+          <p>
+            <%= count %> <%= cor.pluralize %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <div class="row lil-top-margin">
   <div class="col-xs-6 col-xs-offset-6 col-md-3 col-md-offset-9">

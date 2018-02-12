@@ -1,5 +1,6 @@
 class VendasController < ApplicationController
   before_action :set_venda, only: [:edit, :update, :destroy, :novo_pagamento]
+  before_action :make_stats, only: [:index, :inadimplentes]
 
   # GET /vendas
   # GET /vendas.json
@@ -9,10 +10,7 @@ class VendasController < ApplicationController
 
   # GET /vendas/inadimplentes
   def inadimplentes
-    @vendas = []
-    Venda.all.each do |x|
-      @vendas.push(x) unless x.pago?
-    end
+    @vendas = Venda.pendentes
     render :index
   end
 
@@ -63,6 +61,10 @@ class VendasController < ApplicationController
     def set_venda
       @venda = Venda.find(params[:id])
       @bixo = @venda.bixo
+    end
+
+    def make_stats
+      @stats = Venda.stats
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
