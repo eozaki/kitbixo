@@ -18,7 +18,17 @@
         </div>
       </div>
     </div>
+
     <div class="container">
+      <ul class="nav nav-tabs">
+        <% if bixos_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'bixos', bixos_path %>
+        </li>
+        <% if vendas_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'vendas', vendas_path %>
+        </li>
+      </ul>
+
       <%= flash_messages %>
 
       <%= yield %>

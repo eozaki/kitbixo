@@ -1,0 +1,23 @@
+
+<div class="grid">
+  <% @vendas.each_with_index do |v, i| %>
+    <div class="row list-item-<%= i % 2 %>">
+      <h4>
+        <div class="col-md-4 col-xs-6">
+          <%= link_to v.nome, bixo_path(v.bixo.id) %>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <%= v.cor %>
+        </div>
+        <div class="col-md-2 hiddex-sm-down">
+          <%= v.tamanho %>
+        </div>
+        <div class="col-md-2 hiddex-sm-down">
+          <% if v.pago? %><strong class="text-success"><% else %><strong class="text-danger"><% end %>
+            <%= v.total_pago %>
+          </strong>
+        </div>
+      </h4>
+    </div>
+  <% end %>
+</div>

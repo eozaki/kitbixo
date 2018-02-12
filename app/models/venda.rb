@@ -11,6 +11,10 @@ class Venda < ApplicationRecord
     80
   end
 
+  def nome
+    bixo.nome
+  end
+
   def total_pago
     pagamentos.sum(&:valor)
   end
