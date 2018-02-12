@@ -22,4 +22,8 @@ module ApplicationHelper
     params[:controller] == "vendas" and params[:action] == "index"
   end
 
+  def modalidades_index?
+    params[:controller] == "modalidades" and params[:action] == "index"
+  end
+
 end
