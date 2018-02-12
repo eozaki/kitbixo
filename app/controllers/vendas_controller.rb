@@ -7,6 +7,15 @@ class VendasController < ApplicationController
     @vendas = Venda.all
   end
 
+  # GET /vendas/inadimplentes
+  def inadimplentes
+    @vendas = []
+    Venda.all.each do |x|
+      @vendas.push(x) unless x.pago?
+    end
+    render :index
+  end
+
   # GET /vendas/1/edit
   def edit
   end

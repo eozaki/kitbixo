@@ -1,6 +1,19 @@
 
 <h1>Kits vendidos</h1>
 
+<div class="row lil-top-margin">
+  <div class="col-xs-6 col-xs-offset-6 col-md-3 col-md-offset-9">
+    <ul class="nav nav-pills nav-justified">
+      <% if lista_todos? %><li class="active"><% else %><li><% end %>
+        <%= link_to "Todos", vendas_path %>
+      </li>
+      <% if lista_inadimplentes? %><li class="active"><% else %><li><% end %>
+        <%= link_to "Inadimplentes", inadimplentes_path %></li>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <div class="grid">
   <% @vendas.each_with_index do |v, i| %>
     <div class="row list-item-<%= i % 2 %>">
