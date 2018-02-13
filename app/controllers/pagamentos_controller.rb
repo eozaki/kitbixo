@@ -1,65 +1,44 @@
 class PagamentosController < ApplicationController
-  def new
-    @pagamento = Pagamento.new
-    @veteranos = Veterano.order('nome ASC').all
+  before_action :set_pagamento, only: [:edit, :update, :destroy]
 
-    @pagamento.venda = Venda.find(params[:venda])
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @pagamento }
-    end
-  end
-
+  # GET /pagamento/1/edit
   def edit
-    @pagamento = Pagamento.find(params[:id])
-    @veteranos = Veterano.order('nome ASC').all
   end
 
-  def create
-    @pagamento = Pagamento.new(params[:pagamento])
-
-    respond_to do |format|
-      if @pagamento.save
-        format.html { redirect_to @pagamento.venda, :notice => 'Pagamento was successfully created.' }
-        format.json { render :json => @pagamento, :status => :created, :location => @pagamento }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @pagamento.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
+  # PATCH/PUT /pagamento/1
+  # PATCH/PUT /pagamento/1.json
   def update
-    @pagamento = Pagamento.find(params[:id])
-    venda_id = @pagamento.venda_id
-
     respond_to do |format|
-      if @pagamento.update_attributes(params[:pagamento])
-        format.html {
-          redirect_to Venda.find(venda_id),
-          :notice => 'Pagamento was successfully updated.'
-        }
-        format.json { head :no_content }
+      if @pagamento.update(pagamento_params)
+        format.html { redirect_to @bixo, notice: 'Pagamento registrado com sucesso' }
+        format.json { render @bixo, status: :ok }
       else
-        format.html { render :action => "edit" }
-        format.json {
-          render :json => @pagamento.errors,
-          :status => :unprocessable_entity
-        }
+        format.html { render :edit }
+        format.json { render json: @pagamento.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  # DELETE /pagamentos/1
+  # DELETE /pagamentos/1.json
   def destroy
-    @pagamento = Pagamento.find(params[:id])
-    venda = @pagamento.venda
     @pagamento.destroy
-
     respond_to do |format|
-      format.html { redirect_to venda }
+      format.html { redirect_to @bixo, notice: 'Pagamento apagado com sucesso' }
       format.json { head :no_content }
     end
   end
 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_pagamento
+      @pagamento = Pagamento.find(params[:id])
+      @venda = @pagamento.venda
+      @bixo = @venda.bixo
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def pagamento_params
+      params.require(:pagamento).permit(:valor, :venda_id, :veterano_id)
+    end
 end

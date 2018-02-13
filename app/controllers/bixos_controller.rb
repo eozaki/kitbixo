@@ -1,95 +1,112 @@
 class BixosController < ApplicationController
+  before_action :set_bixo, only: [:show, :edit, :update, :destroy, :modalidades,
+                                  :modify_modalidades, :nova_venda]
 
-  # GET /bixos/new
-  # GET /bixos/new.json
-  def new
-  	@bixo = Bixo.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @bixo }
-    end
+  # GET /bixos
+  # GET /bixos.json
+  def index
+    @bixos = Bixo.all
   end
 
   # GET /bixos/1
   # GET /bixos/1.json
   def show
-  	@bixo = Bixo.find(params[:id])
-    @vendas = Venda.where(:bixo_id => params[:id])
+  end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @bixo }
-    end
+  # GET /bixos/new
+  def new
+    @bixo = Bixo.new
   end
 
   # GET /bixos/1/edit
-  # GET /bixos/1/edit.json
   def edit
-    @bixo = Bixo.find(params[:id])
   end
 
-  def index
-  	@bixos = Bixo.order('nome ASC').all
+  # GET /bixos/1/modalidades
+  def modalidades
+  end
 
+  # POST /bixos/1/modalidades
+  def modify_modalidades
+    @bixo.modalidades = modalidades_params.to_hash.map { |k,v| Modalidade.find(k) }
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @bixos }
+      if @bixo.save
+        format.html { redirect_to @bixo, notice: 'Modalidades modificadas com sucesso!' }
+        format.json { render :show, status: :created, location: @bixo }
+      else
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :new }
+        format.json { render json: @bixo.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-   # POST /bixos
+  # POST /bixos/1/nova_venda
+  def nova_venda
+    @venda = Venda.create(bixo_id: @bixo.id)
+    respond_to do |format|
+      if @venda.persisted?
+        format.html { redirect_to edit_venda_path(@venda), notice: 'Venda criada com sucesso!' }
+        format.json { render :show, status: :created, location: @bixo }
+      else
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :show }
+        format.json { render json: @bixo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /bixos
   # POST /bixos.json
   def create
-    @bixo = Bixo.new(params[:bixo])
-
-    if @bixo.curso == "Outro"
-      @bixo.curso = @bixo.curso_outro
-    end
+    @bixo = Bixo.new(bixo_params)
 
     respond_to do |format|
       if @bixo.save
-        format.html { redirect_to @bixo, :notice => 'bixo was successfully created.' }
-        format.json { render :json => @bixo, :status => :created, :location => @bixo }
+        format.html { redirect_to @bixo, notice: 'bIXO criado com sucesso!' }
+        format.json { render :show, status: :created, location: @bixo }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @bixo.errors, :status => :unprocessable_entity }
-      end
-    end
-   end
-
-   # PUT /bixos/1
-  # PUT /bixos/1.json
-  def update
-    @bixo = Bixo.find(params[:id])
-
-    if params[:bixo][:curso] == "Outro"
-      params[:bixo][:curso] = params[:bixo][:curso_outro]
-    end
-
-    respond_to do |format|
-      if @bixo.update_attributes(params[:bixo])
-        format.html { redirect_to @bixo, :notice => 'bixo was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @bixo.errors, :status => :unprocessable_entity }
+        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :new }
+        format.json { render json: @bixo.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  # PATCH/PUT /bixos/1
+  # PATCH/PUT /bixos/1.json
+  def update
+    respond_to do |format|
+      if @bixo.update(bixo_params)
+        format.html { redirect_to @bixo, notice: 'bIXO atualizado com sucesso' }
+        format.json { render :show, status: :ok, location: @bixo }
+      else
+        format.html { render :edit }
+        format.json { render json: @bixo.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /bixos/1
   # DELETE /bixos/1.json
   def destroy
-    @bixo = Bixo.find(params[:id])
     @bixo.destroy
-
     respond_to do |format|
-      format.html { redirect_to bixos_url }
+      format.html { redirect_to bixos_url, notice: 'bIXO apagado com sucesso' }
       format.json { head :no_content }
     end
   end
 
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_bixo
+      @bixo = Bixo.find(params[:id])
+    end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def bixo_params
+      params[:bixo][:curso] = params[:bixo][:curso].to_i
+      params.require(:bixo).permit(:nome, :email, :telefone, :curso)
+    end
+
+    def modalidades_params
+      params.require(:modalidades).permit!
+    end
 end

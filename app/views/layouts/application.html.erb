@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KitbIXO2</title>
-  <%= stylesheet_link_tag    "application", :media => "all", 'data-turbolinks-track' => true  %>
-  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Kitbixo</title>
+    <%= csrf_meta_tags %>
 
-<h1><%= link_to "Sistema Kit-bIXO", home_index_path %></h1>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-<nav>
-  <ul>
-    <li>
-      <%= link_to "bIXES", bixos_path %>
-    </li>
-    <li>
-      <%= link_to "Kits-bixo", vendas_path %>
-    </li>
-    <li>
-      <%= link_to "Veteranes", veteranos_path %>
-    </li>
-    <li>
-      <%= link_to "Esportes", esportes_path %>
-    </li>
-  </ul>
-</nav>
+  <body>
+    <div class="banner">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <%= link_to root_path, style: 'color: #fff' do %>
+            <h1>KIT bIXO</h1>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-<section>
-  <%= yield %>
-</section>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <% if bixos_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'bixos', bixos_path %>
+        </li>
+        <% if vendas_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'vendas', vendas_path %>
+        </li>
+        <% if modalidades_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'modalidades', modalidades_path %>
+        </li>
+      </ul>
 
-<footer style="height: 120px"></footer>
+      <%= flash_messages %>
 
-</body>
+      <%= yield %>
+    </div>
+  </body>
 </html>

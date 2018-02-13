@@ -1,40 +1,45 @@
-<%= form_for(@bixo) do |f| %>
-  <% if @bixo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bixo.errors.count, "error") %> O que deu caca:</h2>
-
-      <ul>
-      <% @bixo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: bixo, local: true) do |form| %>
+  <div class="row">
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Nome: " %>
+        <%= form.text_field :nome, id: :bixo_nome, autofocus: true %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :nome %><br />
-    <%= f.text_field :nome %>
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Email: " %>
+        <%= form.text_field :email, id: :bixo_email %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Telefone: " %>
+        <%= form.text_field :telefone, id: :bixo_telefone %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="field">
+        <%= form.label "Curso: " %><br>
+        <%= form.collection_select :curso, Bixo.cursos, :last, :first %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :telefone %><br />
-    <%= f.text_field :telefone %>
-  </div>
-  <div class="field">
-    <%= f.label :curso%><br/>
-    <% cursos.each do | curso | %>
-      <%= f.radio_button :curso, curso %>
-      <%= f.label curso %>
-      </br>
-    <% end %>
-    <%= f.radio_button :curso, "Outro" %>
-    <%= f.label "Outro:" %>
-    <%= f.text_field :curso_outro %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Confirmar" %>
+
+  <div class="row">
+    <div class="col-md-3 col-xs-6">
+      <div class="actions">
+        <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg btn-wide' %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-md-offset-6 col-xs-6">
+      <div class="actions">
+        <%= form.submit (form.object.new_record? ? 'Cadastrar' : 'Atualizar'), class: 'btn btn-success btn-lg' %>
+      </div>
+    </div>
   </div>
 <% end %>

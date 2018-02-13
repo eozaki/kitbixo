@@ -1,7 +1,53 @@
-<h1>Modificar pagamento de <br><%= link_to @pagamento.venda.bixo.nome, @pagamento.venda.bixo %></h1>
+<h1>Editando pagamento do kit-bixo de <%= @bixo.nome %></h1>
 
-<% if @veteranos.empty? %>
-  Nenhum veteranos registrado para receber o pagamento!</br>
-<% else %>
-  <%= render 'form' %>
-<% end %>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <%= form_with(model: @pagamento, local: true) do |form| %>
+      <% if @pagamento.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(venda.errors.count, "error") %> prohibited this venda from being saved:</h2>
+    
+          <ul>
+          <% @pagamento.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+    
+      <h3>Valor pago</h3>
+
+      <%= hidden_field(:pagamento, :venda_id, value: @venda.id) %>
+    
+      <div class="">
+        <%= number_field(:pagamento, :valor, in: 0.0 .. Venda.preco, step: 1.0) %>
+      </div>
+
+      <h3>Veterane que recebeu o pagamento</h3>
+    
+      <% Veterano.all.each do |veterano| %>
+        <div class="radio">
+          <%= radio_button_tag("pagamento[veterano_id]", veterano.id, (veterano.id==@pagamento.veterano_id)) %>
+          <%= label_tag("pagamento[veterano_id]", veterano.nome) %>
+        </div>
+      <% end %>
+    
+      <div class="row">
+        <div class="col-md-6">
+          <div class="actions">
+            <%= link_to 'Voltar', @bixo, class: 'btn btn-danger btn-lg btn-wide'%>
+          </div>
+        </div>
+    
+        <div class="col-md-6">
+          <div class="actions">
+            <%= form.submit "Confirmar", class: 'btn btn-success btn-lg' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+

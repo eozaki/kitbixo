@@ -1,85 +1,15 @@
-KitbIXO2::Application.routes.draw do
+Rails.application.routes.draw do
+  root to: 'bixos#index'
 
-  resources :esporte_bixos
-
-
-  resources :esportes
-  #get "bixos/new"
-
-  #get "bixos/show"
-
-  #get "bixos/edit"
+  get '/bixos/:id/modalidades' => 'bixos#modalidades', as: :edit_bixo_modalidades
+  post '/bixos/:id/modalidades' => 'bixos#modify_modalidades', as: :modify_bixo_modalidades
+  post '/bixos/:id/nova_venda' => 'bixos#nova_venda', as: :nova_venda
+  put '/vendas/:id/novo_pagamento' => 'vendas#novo_pagamento', as: :novo_pagamento
+  get '/vendas/inadimplentes' => 'vendas#inadimplentes', as: :inadimplentes
 
   resources :bixos
-  get 'bixos/delete/:id' => 'bixos#destroy', as: :destroy_bixo
-
-  get "vendas/showBixos"
-  resources :vendas
-  get "inadimplentes" => 'vendas#index_inadimplentes', as: :inadimplentes
-  get 'vendas/delete/:id' => 'vendas#destroy', as: :destroy_venda
-
-  resources :veteranos
-
-  resources :pagamentos
-  get 'pagamentos/delete/:id' => 'pagamentos#destroy', as: :destroy_pagamento
-
-  get "home/index"
-
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'home#index'
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  resources :veteranos, except: [:show, :new]
+  resources :modalidades
+  resources :vendas, except: [:show, :new, :create]
+  resources :pagamentos, except: [:show, :index, :new, :create]
 end

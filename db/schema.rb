@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -9,60 +8,55 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150205173657) do
+ActiveRecord::Schema.define(version: 20180210141445) do
 
-  create_table "bixos", :force => true do |t|
-    t.string   "nome"
-    t.string   "telefone"
-    t.string   "email"
-    t.string   "curso"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "curso_outro"
-  end
-
-  create_table "esporte_bixos", :force => true do |t|
-    t.integer  "bixo_id"
-    t.integer  "esporte_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "esporte_bixos", ["bixo_id"], :name => "index_esporte_bixos_on_bixo_id"
-  add_index "esporte_bixos", ["esporte_id"], :name => "index_esporte_bixos_on_esporte_id"
-
-  create_table "esportes", :force => true do |t|
-    t.string   "modalidade"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "pagamentos", :force => true do |t|
-    t.integer  "valor"
-    t.string   "responsavel"
-    t.integer  "venda_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "pagamentos", ["venda_id"], :name => "index_pagamentos_on_venda_id"
-
-  create_table "vendas", :force => true do |t|
-    t.string   "cor_da_mochila"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "bixo_id"
-    t.string   "tamanho_camisa"
-  end
-
-  add_index "vendas", ["bixo_id"], :name => "index_vendas_on_bixo_id"
-
-  create_table "veteranos", :force => true do |t|
+  create_table "bixos", force: :cascade do |t|
     t.string "nome"
-    t.string "telefone"
     t.string "email"
+    t.string "telefone"
+    t.integer "curso"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bixos_modalidades", id: false, force: :cascade do |t|
+    t.integer "bixo_id"
+    t.integer "modalidade_id"
+    t.index ["bixo_id"], name: "index_bixos_modalidades_on_bixo_id"
+    t.index ["modalidade_id"], name: "index_bixos_modalidades_on_modalidade_id"
+  end
+
+  create_table "modalidades", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pagamentos", force: :cascade do |t|
+    t.decimal "valor"
+    t.integer "venda_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "veterano_id"
+    t.index ["venda_id"], name: "index_pagamentos_on_venda_id"
+    t.index ["veterano_id"], name: "index_pagamentos_on_veterano_id"
+  end
+
+  create_table "vendas", force: :cascade do |t|
+    t.integer "bixo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cor"
+    t.integer "tamanho"
+    t.index ["bixo_id"], name: "index_vendas_on_bixo_id"
+  end
+
+  create_table "veteranos", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

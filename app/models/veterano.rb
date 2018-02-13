@@ -1,7 +1,4 @@
-class Veterano < ActiveRecord::Base
-  attr_accessible :email, :nome, :telefone
-
-  validates :nome, :presence => true
-  validates :email, :presence => true
-  validates :telefone, :presence => true
+class Veterano < ApplicationRecord
+  validates :nome, presence: true
+  has_many :pagamentos
 end

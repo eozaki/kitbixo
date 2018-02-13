@@ -1,23 +1,49 @@
 
-<h1>Veteranes responsáveis pelas vendas</h1>
 
-<p>
-  <%= link_to 'Nove veterane responsável', new_veterano_path %>
-</p>
+<div class='row'>
+  <div class='col-md-4 col-xs-0'></div>
+  <div class='col-md-4 col-xs-12'>
+    <h1>Veteranes</h1>
+    <div class="grid">
+      <% @veteranos.each_with_index do |b, i| %>
+        <div class="row list-item-<%= i % 2 %>">
+          <div class="col-md-12">
+            <%= b.nome %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class='col-md-4 col-xs-0'></div>
+</div>
 
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Email</th>
-    <th>Telefone</th>
-    <th></th>
-  </tr>
-<% @veteranos.each do |veterano| %>
-  <tr>
-    <td><%= veterano.nome %></td>
-    <td><%= veterano.email %></td>
-    <td><%= veterano.telefone %></td>
-    <td><%= link_to 'Detalhes', veterano %></td>
-  </tr>
-<% end %>
-</table>
+<div class="row" style="height:2em;"></div>
+
+<div class="row">
+  <div class="col-md-4 col-xs-0"></div>
+  <div class="col-md-4 col-xs-12">
+    <%= form_with(model: @veterano, local: true) do |form| %>
+      <% if @veterano.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(venda.errors.count, "error") %> prohibited this venda from being saved:</h2>
+    
+          <ul>
+          <% @veterano.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= text_field(:veterano, :nome) %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Cadastrar veterane", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4 col-xs-0"></div>
+</div>
+

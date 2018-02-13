@@ -1,11 +1,12 @@
-class Bixo < ActiveRecord::Base
-  attr_accessible :curso, :email, :nome, :telefone, :curso_outro
+class Bixo < ApplicationRecord
+  validates :nome, presence: true
+  validates :telefone, presence: true
+  validates :email, presence: true
+  validates :curso, presence: true
 
-  has_many :vendas, :dependent => :destroy
-  has_many :esporte_bixos, :dependent => :destroy
+  has_and_belongs_to_many :modalidades
 
-  validates :nome, :presence => true
-  validates :curso, :presence =>true
-  validates :email, :presence => true
-  validates :telefone, :presence => true
+  has_many :vendas
+
+  enum curso: [:LIC, :PURA, :BCC, :ESTAT, :APLICADA, :BMAC].freeze
 end

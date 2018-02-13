@@ -1,91 +1,106 @@
-class Venda < ActiveRecord::Base
-  attr_accessible :cor_da_mochila, :bixo_id, :tamanho_camisa
-
+class Venda < ApplicationRecord
+  validates :tamanho, presence: true, on: :update
+  validates :cor, presence: true, on: :update
   belongs_to :bixo
   has_many :pagamentos
 
-  validates :bixo_id, :presence => true
-  validates :tamanho_camisa, :presence => true
+  enum cor: { branca: 0, vermelha: 1 }
+  enum tamanho: [:P, :M, :G, :GG, :BabyM, :BabyG, :BabyGG]
 
-  PRECO = 90
-  CUSTO = 65
-
-  def valor
-    total = 0
-    pagamentos.each do |pagamento|
-      total += pagamento.valor
-    end
-    total
-  end
-
-  def divida
-    return [0, PRECO - valor].max
-  end
-
-  def completo?
-    return valor >= PRECO
-  end
-
-  def hora
-    created_at.in_time_zone("Brasilia").strftime "%H:%M - %d/%m/%y"
-  end
-
-  def valor_em interval
-    total = 0
-    pagamentos.where(created_at: interval).each do |pagamento|
-      total += pagamento.valor
-    end
-    total
-  end
-
-  def self.inadimplentes
-    all.map { |x| x }.keep_if do |venda| venda.valor < PRECO end
+  def self.valor
+    42.71
   end
 
   def self.preco
-    PRECO
+    80.0
   end
 
-  def self.custo
-    CUSTO
+  def self.estoque
+    200
   end
 
-  def self.stats interval=(Time.new(2016,2,1)..Time.now)
-    stats = {
-      total: 0,
-      partials: 0,
-      partialsvalue: 0,
-      vendas: 0,
-      quitados: 0,
-      vermelhos: 0,
-      brancos: 0,
-      camisetas: {
-        "P" => 0, "M" => 0, "G" => 0, "GG" => 0,
-        "Baby M" => 0, "Baby G" => 0, "Baby GG" => 0
-      }
-    }
-    check = {}
-    Venda.where(created_at: interval).each do |venda|
-      stats[:vendas] += 1
-      stats[:vermelhos] += 1 if venda.cor_da_mochila == "Vermelha"
-      stats[:brancos] += 1 if venda.cor_da_mochila == "Branca"
-      stats[:camisetas][venda.tamanho_camisa] += 1
+  def self.estoque_camisetas
+    result = {}
+    result[:P] = 35
+    result[:M] = 55
+    result[:G] = 45
+    result[:GG] = 20
+    result[:BabyM] = 5
+    result[:BabyG] = 20
+    result[:BabyGG] = 20
+    result
+  end
+
+  def self.estoque_mochilas
+    result = {}
+    result[:branca] = 40
+    result[:vermelha] = 160
+    result
+  end
+
+  def nome
+    bixo.nome
+  end
+
+  def total_pago
+    pagamentos.sum(&:valor)
+  end
+
+  def pago?
+    total_pago >= Venda.preco
+  end
+
+  def self.pagos
+    result = []
+    all.each do |v|
+      result.push(v) if v.pago?
     end
-    Pagamento.where(created_at: interval).each do |pagamento|
-      valor = pagamento.valor
-      total = pagamento.venda.valor_em interval
-      stats[:total] += valor
-      unless check[pagamento.venda_id] == true
-        if total < PRECO
-          stats[:partialsvalue] += valor
-        else
-          stats[:quitados] += 1
-        end
-        check[pagamento.venda_id] = true
-      end
-      stats[:partials] = stats[:vendas] - stats[:quitados]
+    result
+  end
+
+  def self.pendentes
+    result = []
+    all.each do |v|
+      result.push(v) unless v.pago?
     end
+    result
+  end
+
+  def self.estoque_tamanho t
+    estoque_camisetas[t.to_sym] - where(tamanho: t).count
+  end
+
+  def self.estoque_cor c
+    estoque_mochilas[c.to_sym] - where(cor: c).count
+  end
+
+  def self.stats
+    stats = {}
+    stats[:vendidos] = all.count
+    stats[:pagos] = pagos.count
+    stats[:pendentes] = pendentes.count
+    total_pago = 0
+    total_pendente = 0
+    all.each do |v|
+      pago = v.total_pago
+      total_pago += pago
+      total_pendente += preco - pago
+    end
+    stats[:total_pago] = total_pago
+    stats[:total_pendente] = total_pendente
+    stats[:total_esperado] = total_pago + total_pendente
+    stats[:balanco] = total_pago - valor*estoque
+    stats[:balanco_esperado] = total_pago + total_pendente - valor*estoque
+    camisetas = {}
+    tamanhos.each do |k,t|
+      camisetas[k] = estoque_tamanho k.to_sym
+    end
+    stats[:camisetas] = camisetas
+    mochilas = {}
+    cors.each do |k,c|
+      mochilas[k] = estoque_cor k.to_sym
+    end
+    stats[:mochilas] = mochilas
     stats
   end
-
 end

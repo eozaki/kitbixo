@@ -1,74 +1,117 @@
-
 <h1><%= @bixo.nome %></h1>
 
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-4 col-xs-12">
+    <h2>Dados pessoais</h2>
 
-<p>
-  <b>E-mail:</b>
-  <%= @bixo.email %>
-</p>
+    <div class="row">
+      <div class="col-md-12 col-xs-6">
+        <h4>Nome</h4>
+        <p>
+          <%= @bixo.nome %>
+        </p>
+      </div>
 
-<p>
-  <b>Telefone:</b>
-  <%= @bixo.telefone %>
-</p>
+      <div class="col-md-12 col-xs-6">
+        <h4>E-mail</h4>
+        <p>
+          <%= @bixo.email %>
+        </p>
+      </div>
 
-<p>
-  <b>Curso:</b>
-  <%= @bixo.curso %>
-</p>
+      <div class="col-md-12 col-xs-6">
+        <h4>Telefone</h4>
+        <p>
+          <%= @bixo.telefone %>
+        </p>
+      </div>
 
-<br>
-<p>
-  <%= link_to 'Editar', edit_bixo_path(@bixo) %>
-  <%= link_to 'Remover', destroy_bixo_path(@bixo),
-            :data => { :confirm => 'Tem certeza?' } %>
-  <%= link_to 'Kit-bixo', new_venda_path(:bixo => @bixo.id) %>
-  <%= link_to 'Atlética', new_esporte_bixo_path(:bixo => @bixo.id) %>
-</p>
-
-<br>
-<br>
-<hr>
-<h2>Kits vendidos</h2>
-
-<table>
-  <tr>
-    <th>Cor da mochila</th>
-    <th>Tamanho camiseta</th>
-    <th>Valor pago</th>
-    <th></th>
-  </tr>
-  <% @vendas.each do |venda| %>
-    <% if venda.valor>=75 %>
-      <tr>
+      <div class="col-md-12 col-xs-6">
+        <h4>Curso</h4>
+        <p>
+          <%= @bixo.curso %>
+        </p>
+      </div>
+    </div>
+    <div class="actions">
+      <%= link_to 'Editar', edit_bixo_path(@bixo), class: 'btn btn-success btn-lg' %>
+    </div>
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <h2>Modalidades</h2>
+    <% if @bixo.modalidades.empty? %>
+      <p><em>Nenhuma</em></p>
     <% else %>
-      <tr class="bad">
+      <% @bixo.modalidades.each do |mod| %>
+        <p>
+          <%= mod.nome %>
+        </p>
+      <% end %>
     <% end %>
-    <td>
-      <%= venda.cor_da_mochila %>
-    </td>
-    <td><%= venda.tamanho_camisa %></td>
-    <td><%= venda.valor %>/80</td>
-    <td><%= link_to 'Detalhes', venda %></td>
-    </tr>
-  <% end %>
-</table>
+    <div class="actions">
+      <%= link_to 'Mudar modalidades', edit_bixo_modalidades_path(@bixo), class: 'btn btn-success btn-lg' %>
+    </div>
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <% if @bixo.vendas.empty? %>
+      <h2><em>Ainda não comprou kit</em></h2>
+    <% else %>
+      <% count = 1 %>
+      <% @bixo.vendas.each do |venda| %>
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3>Kit vendido #<%= count %></h3></div>
+          <div class="panel-body">
+            <% count += 1 %>
+            <div class='row'>
+              <div class='col-md-12 col-xs-6'>
+                <h4>Tamanho da camiseta</h4>
+                <p><%= venda.tamanho %></p>
+              </div>
+              <div class='col-md-12 col-xs-6'>
+                <h4>Cor da mochila</h4>
+                <p><%= venda.cor %></p>
+              </div>
+            </div>
+            <% if venda.pagamentos.empty? %>
+              <p class="text-danger"><em>Nenhum pagamento recebido ainda</em></p>
+            <% else %>
+              <div class='row'>
+                <div class='col-md-12 col-xs-6'>
+                  <h4>Pagamentos:</h4>
+                  <% venda.pagamentos.each do |pagamento| %>
+                    <p>
+                      <%= link_to edit_pagamento_path(pagamento) do %>
+                        R$ <%= "%.2f" % pagamento.valor %>
+                        para <%= pagamento.veterano.nil? and "???" or pagamento.veterano.nome %>
+                      <% end %>
+                      <%= link_to 'X', pagamento_path(pagamento), class: 'btn btn-danger btn-xs', method: :delete %>
+                    </p>
+                  <% end %>
+                </div>
+                <div class='col-md-12 col-xs-6'>
+                  <h4>Total pago</h4>
+                  <p>R$ <%= "%.2f" % venda.total_pago %> / R$ <%= "%.2f" % Venda.preco %></p>
+                </div>
+              </div>
+            <% end %>
+            <% unless venda.pago? %>
+              <p class="text-danger"><strong>Pagamento incompleto!</strong></p>
+            <% end %>
+            <div class="actions">
+              <%= link_to 'Pagar', novo_pagamento_path(venda), class: 'btn btn-success', method: :put unless venda.pago? %>
+              <%= link_to 'Editar', edit_venda_path(venda), class: 'btn btn-warning' %>
+              <%= link_to 'Remover', venda_path(venda), class: 'btn btn-danger', method: :delete %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="actions">
+      <%= link_to 'Vender Kit', nova_venda_path(@bixo), class: 'btn btn-success btn-lg', method: :post %>
+    </div>
+  </div>
+</div>
 
-<br>
-<br>
-<hr>
-<h2>Modalidades em que está cadastrado</h2>
-
-<table>
-  <tr>
-    <th>Modalidade</th>
-  </tr>
-  <% @bixo.esporte_bixos.each do |entry| %>
-    <tr>
-      <td>
-        <%= entry.esporte.modalidade %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class="actions">
+  <%= link_to 'Voltar à lista', bixos_path, class: 'btn btn-danger btn-lg' %>
+</div>
