@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180210141445) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bixos", force: :cascade do |t|
     t.string "nome"
     t.string "email"
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 20180210141445) do
   end
 
   create_table "bixos_modalidades", id: false, force: :cascade do |t|
-    t.integer "bixo_id"
-    t.integer "modalidade_id"
+    t.bigint "bixo_id"
+    t.bigint "modalidade_id"
     t.index ["bixo_id"], name: "index_bixos_modalidades_on_bixo_id"
     t.index ["modalidade_id"], name: "index_bixos_modalidades_on_modalidade_id"
   end
@@ -36,16 +39,16 @@ ActiveRecord::Schema.define(version: 20180210141445) do
 
   create_table "pagamentos", force: :cascade do |t|
     t.decimal "valor"
-    t.integer "venda_id"
+    t.bigint "venda_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "veterano_id"
+    t.bigint "veterano_id"
     t.index ["venda_id"], name: "index_pagamentos_on_venda_id"
     t.index ["veterano_id"], name: "index_pagamentos_on_veterano_id"
   end
 
   create_table "vendas", force: :cascade do |t|
-    t.integer "bixo_id"
+    t.bigint "bixo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cor"
@@ -59,4 +62,5 @@ ActiveRecord::Schema.define(version: 20180210141445) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pagamentos", "veteranos"
 end
