@@ -6,5 +6,7 @@ class Bixo < ApplicationRecord
 
   has_and_belongs_to_many :modalidades
 
-  enum curso: [:lic, :pura, :bcc, :estat, :aplicada, :bmac].freeze
+  has_many :vendas
+
+  enum curso: [:LIC, :PURA, :BCC, :ESTAT, :APLICADA, :BMAC].freeze
 end

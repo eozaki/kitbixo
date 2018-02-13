@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203155057) do
+ActiveRecord::Schema.define(version: 20180210141445) do
 
   create_table "bixos", force: :cascade do |t|
     t.string "nome"
@@ -29,6 +29,31 @@ ActiveRecord::Schema.define(version: 20171203155057) do
   end
 
   create_table "modalidades", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pagamentos", force: :cascade do |t|
+    t.decimal "valor"
+    t.integer "venda_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "veterano_id"
+    t.index ["venda_id"], name: "index_pagamentos_on_venda_id"
+    t.index ["veterano_id"], name: "index_pagamentos_on_veterano_id"
+  end
+
+  create_table "vendas", force: :cascade do |t|
+    t.integer "bixo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "cor"
+    t.integer "tamanho"
+    t.index ["bixo_id"], name: "index_vendas_on_bixo_id"
+  end
+
+  create_table "veteranos", force: :cascade do |t|
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

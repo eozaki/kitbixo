@@ -12,11 +12,26 @@
     <div class="banner">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>KIT bIXO</h1>
+          <%= link_to root_path, style: 'color: #fff' do %>
+            <h1>KIT bIXO</h1>
+          <% end %>
         </div>
       </div>
     </div>
+
     <div class="container">
+      <ul class="nav nav-tabs">
+        <% if bixos_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'bixos', bixos_path %>
+        </li>
+        <% if vendas_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'vendas', vendas_path %>
+        </li>
+        <% if modalidades_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'modalidades', modalidades_path %>
+        </li>
+      </ul>
+
       <%= flash_messages %>
 
       <%= yield %>

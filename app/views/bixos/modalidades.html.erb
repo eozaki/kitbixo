@@ -1,0 +1,25 @@
+
+<h1>Mudar modalidades de <%= @bixo.nome %></h1>
+
+<%= form_tag do %>
+  <% Modalidade.all.each do |mod| %>
+    <div class="checkbox">
+      <%= check_box_tag("modalidades[#{mod.id}]") %>
+      <%= label_tag("modalidades[#{mod.id}]", mod.nome) %>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-3 col-xs-6">
+      <div class="actions">
+        <%= link_to 'Voltar', @bixo, class: 'btn btn-danger btn-lg btn-wide' %>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-md-offset-6 col-xs-6">
+      <div class="actions">
+        <%= submit_tag 'Confirmar', class: 'btn btn-success btn-lg' %>
+      </div>
+    </div>
+  </div>
+<% end %>

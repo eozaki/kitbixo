@@ -13,4 +13,17 @@ module ApplicationHelper
     end
     nil
   end
+
+  def bixos_index?
+    params[:controller] == "bixos" and params[:action] == "index"
+  end
+
+  def vendas_index?
+    params[:controller] == "vendas" and params[:action] == "index"
+  end
+
+  def modalidades_index?
+    params[:controller] == "modalidades" and params[:action] == "index"
+  end
+
 end
