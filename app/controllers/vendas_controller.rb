@@ -71,7 +71,7 @@ class VendasController < ApplicationController
     def venda_params
       v = params.require(:venda).permit(:tamanho, :cor, :bixo_id)
       v[:tamanho] = v[:tamanho].to_i
-      v[:cor] = v[:cor].to_i
+      v[:cor] = v[:cor].to_i unless v[:cor].nil?
       v
     end
 end

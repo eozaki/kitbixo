@@ -1,6 +1,5 @@
 class Venda < ApplicationRecord
   validates :tamanho, presence: true, on: :update
-  validates :cor, presence: true, on: :update
   belongs_to :bixo
   has_many :pagamentos
 
