@@ -4,7 +4,7 @@
 <%= form_tag do %>
   <% Modalidade.all.each do |mod| %>
     <div class="checkbox">
-      <%= check_box_tag("modalidades[#{mod.id}]") %>
+      <%= check_box_tag("modalidades[#{mod.id}]", mod.nome, @check[mod.id] == true) %>
       <%= label_tag("modalidades[#{mod.id}]", mod.nome) %>
     </div>
   <% end %>
