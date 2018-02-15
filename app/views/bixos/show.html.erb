@@ -35,6 +35,7 @@
     </div>
     <div class="actions">
       <%= link_to 'Editar', edit_bixo_path(@bixo), class: 'btn btn-success btn-lg' %>
+      <%= link_to 'Remover', bixo_path(@bixo), class: 'btn btn-danger btn-lg', method: :delete, data: { :confirm => 'Tem certeza?' } %>
     </div>
   </div>
   <div class="col-md-4 col-xs-12">
