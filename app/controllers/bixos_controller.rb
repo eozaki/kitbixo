@@ -24,6 +24,10 @@ class BixosController < ApplicationController
 
   # GET /bixos/1/modalidades
   def modalidades
+    @check = {}
+    @bixo.modalidades.each do |m|
+      @check[m.id] = true
+    end
   end
 
   # POST /bixos/1/modalidades
@@ -107,6 +111,10 @@ class BixosController < ApplicationController
     end
 
     def modalidades_params
-      params.require(:modalidades).permit!
+      if params[:modalidades].nil? or params[:modalidades].empty?
+        params[:modalidades] = {}
+      else
+        params.require(:modalidades).permit!
+      end
     end
 end
