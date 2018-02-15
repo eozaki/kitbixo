@@ -14,24 +14,17 @@
       </div>
     </div>
 
-    <div class="col-md-2 col-xs-12">
+    <div class="col-md-3 col-xs-12">
       <div class="field">
         <%= form.label "Telefone: " %>
         <%= form.text_field :telefone, id: :bixo_telefone %>
       </div>
     </div>
 
-    <div class="col-md-2 col-xs-12">
+    <div class="col-md-3 col-xs-12">
       <div class="field">
         <%= form.label "Curso: " %><br>
         <%= form.collection_select :curso, Bixo.cursos, :last, :first %>
-      </div>
-    </div>
-
-    <div class="col-md-2 col-xs-12">
-      <div class="field">
-        <%= form.label "Caneca: " %><br>
-        <%= form.check_box :caneca %>
       </div>
     </div>
   </div>

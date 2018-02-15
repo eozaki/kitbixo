@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215102940) do
+ActiveRecord::Schema.define(version: 20180215104914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20180215102940) do
     t.integer "curso"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "caneca", default: false
   end
 
   create_table "bixos_modalidades", id: false, force: :cascade do |t|
@@ -54,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180215102940) do
     t.datetime "updated_at", null: false
     t.integer "cor"
     t.integer "tamanho"
+    t.boolean "caneca"
     t.index ["bixo_id"], name: "index_vendas_on_bixo_id"
   end
 
