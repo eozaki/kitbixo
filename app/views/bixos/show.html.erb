@@ -88,6 +88,10 @@
                   <% end %>
                 </h4>
               </div>
+              <div class='col-md-12 col-xs-6'>
+                <h4>Horário da venda</h4>
+                <%= venda.created_at %>
+              </div>
             </div>
             <% if venda.pagamentos.empty? %>
               <p class="text-danger"><em>Nenhum pagamento recebido ainda</em></p>
