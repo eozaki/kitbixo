@@ -71,12 +71,21 @@
               <div class='col-md-12 col-xs-6'>
                 <h4>Cor da mochila</h4>
                 <p>
+                  <% if venda.cor.nil? %>
+                    (não pegou ainda)
+                  <% else %>
                     <%= venda.cor %>
+                  <% end %>
                 </p>
               </div>
               <div class='col-md-12 col-xs-6'>
                 <h4>
                   Pegou caneca?
+                  <% if venda.caneca == true %>
+                    Sim
+                  <% else %>
+                    Não
+                  <% end %>
                 </h4>
               </div>
               <div class='col-md-12 col-xs-6'>
