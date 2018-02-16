@@ -1,6 +1,6 @@
 class VendasController < ApplicationController
   before_action :set_venda, only: [:edit, :update, :destroy, :novo_pagamento]
-  before_action :make_stats, only: [:index, :inadimplentes]
+  before_action :make_stats, only: [:index, :inadimplentes, :sem_caneca]
 
   # GET /vendas
   # GET /vendas.json
@@ -11,6 +11,12 @@ class VendasController < ApplicationController
   # GET /vendas/inadimplentes
   def inadimplentes
     @vendas = Venda.pendentes
+    render :index
+  end
+
+  # GET /vendas/sem_caneca
+  def sem_caneca
+    @vendas = Venda.where(caneca: false)
     render :index
   end
 

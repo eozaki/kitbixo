@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/bixos/:id/nova_venda' => 'bixos#nova_venda', as: :nova_venda
   put '/vendas/:id/novo_pagamento' => 'vendas#novo_pagamento', as: :novo_pagamento
   get '/vendas/inadimplentes' => 'vendas#inadimplentes', as: :inadimplentes
+  get '/vendas/sem_caneca' => 'vendas#sem_caneca', as: :sem_caneca
 
   get '/admin' => 'application#admin', as: :admin
   post '/admin/limpar_mochilas' => 'application#limpa_mochilas', as: :limpa_mochilas
