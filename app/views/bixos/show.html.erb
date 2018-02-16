@@ -90,7 +90,7 @@
               </div>
               <div class='col-md-12 col-xs-6'>
                 <h4>Horário da venda</h4>
-                <%= venda.created_at %>
+                <%= venda.created_at - 2.hours %>
               </div>
             </div>
             <% if venda.pagamentos.empty? %>
