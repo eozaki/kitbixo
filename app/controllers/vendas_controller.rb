@@ -69,7 +69,7 @@ class VendasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venda_params
-      v = params.require(:venda).permit(:tamanho, :cor, :bixo_id)
+      v = params.require(:venda).permit(:tamanho, :cor, :caneca, :bixo_id)
       v[:tamanho] = v[:tamanho].to_i
       v[:cor] = v[:cor].to_i unless v[:cor].nil?
       v
