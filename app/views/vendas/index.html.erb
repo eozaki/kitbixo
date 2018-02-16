@@ -83,7 +83,7 @@
           <%= link_to v.nome, bixo_path(v.bixo.id) %>
         </div>
         <div class="col-md-4 col-xs-6">
-          <%= v.cor %>
+          <%= v.cor.nil? ? "---" : v.cor %>
         </div>
         <div class="col-md-2 hiddex-sm-down">
           <%= v.tamanho %>
