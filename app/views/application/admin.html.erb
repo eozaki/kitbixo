@@ -5,3 +5,12 @@
   <%= link_to 'Limpar mochilas', limpar_mochilas_path, class: 'btn btn-danger btn-lg', method: :post %>
 </div>
 
+<p>
+  <% venda = Venda.first %>
+  <% if venda.caneca? %>
+    <span class="glyphicon glyphicon-ok"></span>
+  <% else %>
+    <span class="glyphicon glyphicon-remove"></span>
+  <% end %>
+</p>
+
