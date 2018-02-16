@@ -7,10 +7,6 @@
 
 <p>
   <% venda = Venda.first %>
-  <% if venda.caneca? %>
-    <span class="glyphicon glyphicon-ok"></span>
-  <% else %>
-    <span class="glyphicon glyphicon-remove"></span>
-  <% end %>
+  <%= venda.caneca? %>
 </p>
 
