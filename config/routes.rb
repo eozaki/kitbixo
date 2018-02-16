@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/vendas/inadimplentes' => 'vendas#inadimplentes', as: :inadimplentes
 
   get '/admin' => 'application#admin', as: :admin
-  post '/admin/limpar_mochilas' => 'application#limpa_mochilas', as: :limpar_mochilas
+  post '/admin/limpar_mochilas' => 'application#limpa_mochilas', as: :limpa_mochilas
+  post '/admin/arruma_canecas' => 'application#arruma_canecas', as: :arruma_canecas
 
   resources :bixos
   resources :veteranos, except: [:show, :new]

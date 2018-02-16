@@ -2,10 +2,7 @@
 <h1>Admin</h1>
 
 <div class="actions">
-  <%= link_to 'Limpar mochilas', limpar_mochilas_path, class: 'btn btn-danger btn-lg', method: :post %>
+  <%= link_to 'Limpar mochilas', limpa_mochilas_path, class: 'btn btn-danger btn-lg', method: :post %>
+  <%= link_to 'Arrumar canecas', arruma_canecas_path, class: 'btn btn-danger btn-lg', method: :post %>
 </div>
-
-<p>
-  <%= Venda.first.caneca? %>
-</p>
 
