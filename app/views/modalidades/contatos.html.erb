@@ -1,11 +1,25 @@
 
 <h1>Contatos por modalidade</h1>
 
+<h2>E-mails</h2>
+
 <% @modalidades.each do |m| %>
   <pre>
 # <%= m.nome %>
 <% m.bixos.each do |b| %>
 <%= b.email %>
+
+<% end %>
+  </pre>
+<% end %>
+
+<h2>Telefones</h2>
+
+<% @modalidades.each do |m| %>
+  <pre>
+# <%= m.nome %>
+<% m.bixos.each do |b| %>
+<%= b.telefone %>
 
 <% end %>
   </pre>
