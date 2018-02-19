@@ -3,25 +3,25 @@
 
 <h2>E-mails</h2>
 
+<pre>
 <% @modalidades.each do |m| %>
-  <pre>
 # <%= m.nome %>
 <% m.bixos.each do |b| %>
 <%= b.email %>
+<% end %>
 
 <% end %>
-  </pre>
-<% end %>
+</pre>
 
 <h2>Telefones</h2>
 
+<pre>
 <% @modalidades.each do |m| %>
-  <pre>
 # <%= m.nome %>
 <% m.bixos.each do |b| %>
 <%= b.telefone %>
+<% end %>
 
 <% end %>
-  </pre>
-<% end %>
+</pre>
 
