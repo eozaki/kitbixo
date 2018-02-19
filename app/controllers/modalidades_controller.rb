@@ -12,6 +12,11 @@ class ModalidadesController < ApplicationController
   def show
   end
 
+  # GET /modalidades/contatos
+  def contatos
+    @modalidades = Modalidade.all
+  end
+
   # GET /modalidades/new
   def new
     @modalidade = Modalidade.new
