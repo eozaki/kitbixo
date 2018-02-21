@@ -30,6 +30,11 @@ class BixosController < ApplicationController
     end
   end
 
+  # GET /bixos/contatos
+  def contatos
+    @bixos = Bixo.all
+  end
+
   # POST /bixos/1/modalidades
   def modify_modalidades
     @bixo.modalidades = modalidades_params.to_hash.map { |k,v| Modalidade.find(k) }
