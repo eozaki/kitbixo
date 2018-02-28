@@ -1,0 +1,12 @@
+steps:
+  - run: bundle exec rspec --format documentation
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: kitbixo-imeusp
+    commands:
+      - rspec
+      - git push git@heroku.com:kitbixo-imeusp.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app kitbixo-imeusp
