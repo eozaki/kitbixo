@@ -27,5 +27,7 @@ module Kitbixo
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.x.preco = ENV['PRECO'].to_f
   end
 end

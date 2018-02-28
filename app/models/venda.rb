@@ -11,30 +11,30 @@ class Venda < ApplicationRecord
   end
 
   def self.preco
-    80.0
+    Rails.configuration.x.preco
   end
 
   def self.estoque
-    200
+    estoque_camisetas.each_value.sum
   end
 
   def self.estoque_camisetas
-    result = {}
-    result[:P] = 35
-    result[:M] = 55
-    result[:G] = 45
-    result[:GG] = 20
-    result[:BabyM] = 5
-    result[:BabyG] = 20
-    result[:BabyGG] = 20
-    result
+    {
+      P: 35,
+      M: 55,
+      G: 45,
+      GG: 20,
+      BabyM: 5,
+      BabyG: 20,
+      BabyGG: 20
+    }
   end
 
   def self.estoque_mochilas
-    result = {}
-    result[:branca] = 40
-    result[:vermelha] = 160
-    result
+    {
+      branca: 40,
+      vermelha: 160
+    }
   end
 
   def nome
@@ -50,19 +50,11 @@ class Venda < ApplicationRecord
   end
 
   def self.pagos
-    result = []
-    all.each do |v|
-      result.push(v) if v.pago?
-    end
-    result
+    all.select { |v| v.pago? }
   end
 
   def self.pendentes
-    result = []
-    all.each do |v|
-      result.push(v) unless v.pago?
-    end
-    result
+    all - pagos
   end
 
   def self.estoque_tamanho t
