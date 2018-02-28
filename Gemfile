@@ -45,6 +45,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
