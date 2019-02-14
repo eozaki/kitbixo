@@ -1,4 +1,6 @@
 class ConfirmationsController < ApplicationController
+  http_basic_authenticate_with name: "comissao", password: "bixoamigonaocomida"
+
   def index
   end
 

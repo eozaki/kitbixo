@@ -10,4 +10,16 @@ class Bixo < ApplicationRecord
   has_one :confirmation
 
   enum curso: [:LIC, :PURA, :BCC, :ESTAT, :APLICADA, :BMAC, :LICNOTURNO].freeze
+
+  def confirmed?
+    confirmation.present?
+  end
+
+  def self.confirmed
+    all.select { |b| b.confirmed? }
+  end
+
+  def self.non_confirmed
+    all.select { |b| !b.confirmed? }
+  end
 end

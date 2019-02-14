@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ConfirmationsController, type: :controller do
   describe '#create' do
+    before do
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('comissao', 'bixoamigonaocomida')
+    end
+
     context 'when the given bixo exists' do
       let(:bixo) { FactoryBot.create(:bixo) }
 
