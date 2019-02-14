@@ -6,8 +6,8 @@ class ConfirmationsController < ApplicationController
 
   def create
     Confirmation.create(bixo_id: params[:id]) if Bixo.find(params[:id])
-    redirect_to bixos_path, success: 'Bixo confirmado'
+    redirect_to bixos_path, notice: 'Bixo confirmado'
   rescue ActiveRecord::RecordNotFound => exception
-    redirect_to bixos_path, danger: exception.message
+    redirect_to bixos_path, alert: exception.message
   end
 end
