@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190214185449) do
+ActiveRecord::Schema.define(version: 20190214193750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20190214185449) do
     t.bigint "modalidade_id"
     t.index ["bixo_id"], name: "index_bixos_modalidades_on_bixo_id"
     t.index ["modalidade_id"], name: "index_bixos_modalidades_on_modalidade_id"
+  end
+
+  create_table "confirmations", force: :cascade do |t|
+    t.bigint "bixo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bixo_id"], name: "index_confirmations_on_bixo_id"
   end
 
   create_table "modalidades", force: :cascade do |t|
@@ -64,5 +71,6 @@ ActiveRecord::Schema.define(version: 20190214185449) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "confirmations", "bixos"
   add_foreign_key "pagamentos", "veteranos"
 end
