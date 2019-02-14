@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get '/bixos/contatos' => 'bixos#contatos', as: :contatos
   get '/bixos/:id/modalidades' => 'bixos#modalidades', as: :edit_bixo_modalidades
   post '/bixos/:id/modalidades' => 'bixos#modify_modalidades', as: :modify_bixo_modalidades
-  post '/bixos/:id/nova_venda' => 'bixos#nova_venda', as: :nova_venda
 
   get '/modalidades/contatos' => 'modalidades#contatos', as: :contato_modalidades
 

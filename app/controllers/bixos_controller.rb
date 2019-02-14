@@ -49,20 +49,6 @@ class BixosController < ApplicationController
     end
   end
 
-  # POST /bixos/1/nova_venda
-  def nova_venda
-    @venda = Venda.create(bixo_id: @bixo.id)
-    respond_to do |format|
-      if @venda.persisted?
-        format.html { redirect_to edit_venda_path(@venda), notice: 'Venda criada com sucesso!' }
-        format.json { render :show, status: :created, location: @bixo }
-      else
-        format.html { flash[:error] = 'Deu caca em alguma coisa'; render :show }
-        format.json { render json: @bixo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # POST /bixos
   # POST /bixos.json
   def create
