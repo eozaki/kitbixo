@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   root to: 'bixos#index'
 
+  resources :bixos, only: [] do
+    member do
+      resources :confirmations, only: %i(create index)
+    end
+  end
+
   get '/bixos/contatos' => 'bixos#contatos', as: :contatos
   get '/bixos/:id/modalidades' => 'bixos#modalidades', as: :edit_bixo_modalidades
   post '/bixos/:id/modalidades' => 'bixos#modify_modalidades', as: :modify_bixo_modalidades
