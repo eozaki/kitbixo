@@ -7,6 +7,7 @@ class Bixo < ApplicationRecord
   has_and_belongs_to_many :modalidades
 
   has_many :vendas
+  has_one :confirmation
 
   enum curso: [:LIC, :PURA, :BCC, :ESTAT, :APLICADA, :BMAC, :LICNOTURNO].freeze
 end

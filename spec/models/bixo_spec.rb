@@ -5,4 +5,5 @@ describe Bixo do
   it { should validate_presence_of(:telefone) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:curso) }
+  it { should have_one(:confirmation) }
 end
