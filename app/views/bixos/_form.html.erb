@@ -21,10 +21,17 @@
       </div>
     </div>
 
-    <div class="col-md-3 col-xs-12">
+    <div class="col-md-2 col-xs-9">
       <div class="field">
         <%= form.label "Curso: " %><br>
         <%= form.collection_select :curso, Bixo.cursos, :last, :first %>
+      </div>
+    </div>
+
+    <div class="col-md-1 col-xs-3">
+      <div class="field">
+        <%= form.label "Tutoria BCC: " %><br>
+        <%= form.check_box :tutorship %>
       </div>
     </div>
   </div>
