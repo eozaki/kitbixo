@@ -27,6 +27,9 @@
         <% if modalidades_index? %><li class='active'><% else %><li><% end %>
           <%= link_to 'modalidades', modalidades_path %>
         </li>
+        <% if confirmations_index? %><li class='active'><% else %><li><% end %>
+          <%= link_to 'confirmações', confirmations_path %>
+        </li>
       </ul>
 
       <%= flash_messages %>

@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   root to: 'bixos#index'
 
   resources :bixos, only: [] do
+    collection do
+      resources :confirmations, only: %i(index)
+    end
+
     member do
-      resources :confirmations, only: %i(create index)
+      resources :confirmations, only: %i(create)
     end
   end
 

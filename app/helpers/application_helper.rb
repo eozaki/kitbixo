@@ -18,8 +18,8 @@ module ApplicationHelper
     params[:controller] == "bixos" and params[:action] == "index"
   end
 
-  def vendas_index?
-    params[:controller] == "vendas" and params[:action] == "index"
+  def confirmations_index?
+    params[:controller] == "confirmations" and params[:action] == "index"
   end
 
   def modalidades_index?

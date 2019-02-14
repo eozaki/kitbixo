@@ -11,6 +11,8 @@ class Bixo < ApplicationRecord
 
   enum curso: [:LIC, :PURA, :BCC, :ESTAT, :APLICADA, :BMAC, :LICNOTURNO].freeze
 
+  delegate :team_color, to: :confirmation
+
   def confirmed?
     confirmation.present?
   end
